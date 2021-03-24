@@ -28,7 +28,7 @@
 			value="org.postgresql.Driver" />
 		<!-- customize this -->
 		<property name="url"
-			value="dealshark.cqqcpmco0lzl.us-east-2.rds.amazonaws.com" />
+			value="jdbc:postgresql://dealshark.cqqcpmco0lzl.us-east-2.rds.amazonaws.com:5432/postgres" />
 
 		<property name="username" value="postgres" />
 		<property name="password" value="postgres" />
