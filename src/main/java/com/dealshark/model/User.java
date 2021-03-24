@@ -1,5 +1,7 @@
 package com.dealshark.model;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,72 +46,127 @@ public class User {
 		
 	}
 
-	public User(String username, String password, String firstName, String lastName, int balance) {
+
+
+	public User(String username, String password, String firstName, String lastName, int balance, int[] gamesArray,
+			int[] purchasedArray) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.balance = balance;
+		this.gamesArray = gamesArray;
+		this.purchasedArray = purchasedArray;
 	}
 
-	public User(int id, String username, String password, String firstName, String lastName, int balance) {
+
+
+	public User(String username, String password, String firstName, String lastName) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.balance = balance;
 	}
+
+
 
 	public int getId() {
 		return id;
 	}
 
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 	public String getUsername() {
 		return username;
 	}
 
+
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
+
 
 	public String getLastName() {
 		return lastName;
 	}
 
+
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+
 
 	public int getBalance() {
 		return balance;
 	}
 
+
+
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
+
+
+
+	public int[] getGamesArray() {
+		return gamesArray;
+	}
+
+
+
+	public void setGamesArray(int[] gamesArray) {
+		this.gamesArray = gamesArray;
+	}
+
+
+
+	public int[] getPurchasedArray() {
+		return purchasedArray;
+	}
+
+
+
+	public void setPurchasedArray(int[] purchasedArray) {
+		this.purchasedArray = purchasedArray;
+	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -117,12 +174,16 @@ public class User {
 		int result = 1;
 		result = prime * result + balance;
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + Arrays.hashCode(gamesArray);
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + Arrays.hashCode(purchasedArray);
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -140,6 +201,8 @@ public class User {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		if (!Arrays.equals(gamesArray, other.gamesArray))
+			return false;
 		if (id != other.id)
 			return false;
 		if (lastName == null) {
@@ -152,6 +215,8 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (!Arrays.equals(purchasedArray, other.purchasedArray))
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -160,12 +225,14 @@ public class User {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", balance=" + balance + "]";
+				+ ", lastName=" + lastName + ", balance=" + balance + ", gamesArray=" + Arrays.toString(gamesArray)
+				+ ", purchasedArray=" + Arrays.toString(purchasedArray) + "]";
 	}
 
 	
-
 }
