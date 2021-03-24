@@ -20,7 +20,7 @@ public class User {
 	@Column(name="USERNAME", unique=true, nullable=false, columnDefinition="VARCHAR")
 	private String username;
 	
-	@Column(name="PASSWORD", nullable=false, columnDefinition="VARCHAR")
+	@Column(name="USER_PASSWORD", nullable=false, columnDefinition="VARCHAR")
 	private String password;
 	
 	@Column(name="FIRST_NAME", nullable=false, columnDefinition="VARCHAR")
@@ -29,8 +29,16 @@ public class User {
 	@Column(name="LAST_NAME", nullable=false, columnDefinition="VARCHAR")
 	private String lastName;
 	
-	@Column(name="BALANCE", nullable=false, columnDefinition="int default 100")
+	@Column(name="BALANCE", nullable=false, columnDefinition="NUMERIC")
 	private int balance;
+	
+	@Column(name="SAVED_GAMES", columnDefinition="INT ARRAY")
+	private int gamesArray[];
+	
+	@Column(name="PURCHASED_GAMES", columnDefinition="INT ARRAY")
+	private int purchasedArray[];
+	
+	
 	
 	public User() {
 		
