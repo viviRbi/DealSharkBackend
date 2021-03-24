@@ -21,6 +21,18 @@
 
 	<!-- this enables the @Transactional -->
 	<tx:annotation-driven />
+	
+	
+	<context:component-scan
+		base-package="com.dealshark.repository" />
+	<context:component-scan
+		base-package="com.dealshark.service" />
+	<context:component-scan
+		base-package="com.dealshark.controller" />
+	<!--   <context:component-scan
+		base-package="com.revature.view" /> -->
+
+
 
 	<bean name="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -42,7 +54,7 @@
 
 
 		<!-- Annotation Mapping -->
-		<property name="packagesToScan" value="com.revature.model" />
+		<property name="packagesToScan" value="com.dealshark.model" />
 		<property name="hibernateProperties">
 
 			<props>
@@ -50,7 +62,7 @@
 				<prop key="show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<!-- customize this -->
-				<prop key="hibernate.default_schema">public</prop>
+				<prop key="hibernate.default_schema">"public"</prop>
 			</props>
 		</property>
 	</bean>
