@@ -41,6 +41,7 @@ public class UserRepositoryImpl implements UserRepository {
 	public User authentication(String userName, String userPassword) {
 		//System.out.println("Loging in");
 		User user = new User();
+		User sendUser;
 		boolean success = false;
 		try {
 			//return (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.like("name", passedThruName))
@@ -55,11 +56,12 @@ public class UserRepositoryImpl implements UserRepository {
 			logger.debug(e);
 		}
 		if (success == true) {
-			user.setPassword("");
+			// send a user with an empty password
+			sendUser = new User(user.getId(), user.getUsername(), "", user.getFirstName(), user.getLastName(), user.getBalance()); 
 		} else {
-			user = new User("", "", "", "", 0);
+			sendUser = new User(0,"", "", "", "", 0);
 		}
-		return user;
+		return sendUser;
 	}
 
 }
