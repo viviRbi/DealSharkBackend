@@ -35,9 +35,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User getUser(String name) {
+	public User getUser(String userName, String userPassword) {
 		
-		return userRepository.findByName(name);
+		return userRepository.authentication(userName, userPassword);
 	}
 	
 	

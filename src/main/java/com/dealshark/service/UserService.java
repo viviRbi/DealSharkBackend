@@ -10,6 +10,6 @@ public interface UserService {
 	
 	public List<User> getAllUsers();
 	
-	public User getUser(String name);
+	public User getUser(String userName, String userPassword);
 
 }

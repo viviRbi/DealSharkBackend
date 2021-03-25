@@ -38,15 +38,28 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public User findByName(String passedThruName) {
-		
+	public User authentication(String userName, String userPassword) {
+		System.out.println("Loging in");
+		User user = new User();
+		boolean success = false;
 		try {
-			return (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.like("name", passedThruName))
-					.list().get(0);
+			//return (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.like("name", passedThruName))
+					//.list().get(0);
+			user = (User) sessionFactory.getCurrentSession().createQuery("FROM User U WHERE U.username = :userName").setParameter("userName", userName)
+	                .uniqueResult();
+
+	            if (user != null && user.getPassword().equals(userPassword)) {
+	                success = true;
+	            }
 		} catch(IndexOutOfBoundsException e) {
 			logger.debug(e);
-			return null;
 		}
+		if (success == true) {
+			user.setPassword("");
+		} else {
+			user = new User("", "", "", "", 0);
+		}
+		return user;
 	}
 
 }

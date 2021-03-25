@@ -31,11 +31,11 @@ public class UserControllerImpl implements UserController{
 		return (userService.registerUser(user)) ? REGISTRATION_SUCCESSFUL : SOMETHING_WRONG;
 	}
 
-	@PostMapping("/findUser")
+	@PostMapping("/authenticateUser")
 	public @ResponseBody User findUser(@RequestBody User user, HttpServletRequest request) {
 		
 		request.getSession();
-		return userService.getUser(user.getFirstName());
+		return userService.getUser(user.getUsername(), user.getPassword());
 	}
 
 	@GetMapping("/findAllUsers")
