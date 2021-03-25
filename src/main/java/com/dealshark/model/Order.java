@@ -1,3 +1,4 @@
+/*
 package com.dealshark.model;
 
 import javax.persistence.*;
@@ -100,3 +101,4 @@ public class Order {
 	
 	
 }
+*/
