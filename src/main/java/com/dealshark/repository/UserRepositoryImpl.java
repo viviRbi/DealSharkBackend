@@ -39,7 +39,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public User authentication(String userName, String userPassword) {
-		System.out.println("Loging in");
+		//System.out.println("Loging in");
 		User user = new User();
 		boolean success = false;
 		try {
