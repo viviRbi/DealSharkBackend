@@ -39,11 +39,11 @@ public class User {
 	private int balance = 100;
 	
 	
-//	@Column(name="SAVED_GAMES", columnDefinition="INTEGER[]")
-//	private Integer[] gamesArray; 
-//	
-//	@Column(name="PURCHASED_GAMES", columnDefinition="INTEGER[]")
-//	private Integer[] purchasedArray;
+	@Column(name="SAVED_GAMES", columnDefinition="VARCHAR")
+	private String gamesArray; 
+	
+	@Column(name="PURCHASED_GAMES", columnDefinition="VARCHAR")
+	private String purchasedArray;
 	
 	
 	
