@@ -11,4 +11,6 @@ public interface UserRepository {
 	List<User> findAll();
 	
 	User authentication(String userName, String userPassword);
+	
+	User findByUsername(String username);
 }

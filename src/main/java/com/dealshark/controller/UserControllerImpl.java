@@ -43,5 +43,12 @@ public class UserControllerImpl implements UserController{
 		
 		return userService.getAllUsers();
 	}
+	
+	@PostMapping("/findUser")
+	public @ResponseBody User findHero(@RequestBody User user, HttpServletRequest request) {
+
+		request.getSession();
+		return userService.getByUsername(user.getUsername());
+	}
 
 }
