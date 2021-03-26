@@ -64,4 +64,20 @@ public class UserRepositoryImpl implements UserRepository {
 		return sendUser;
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		
+	try {
+			
+			return (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.like("username", username))
+					.list().get(0);
+			
+		} catch(IndexOutOfBoundsException e) {
+			logger.debug(e);
+			return null;
+			
+			
+		}
+	}
+
 }

@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService{
 		 
 		 return hashed;
 	}
+
+	@Override
+	public User getByUsername(String username) {
+		
+		return userRepository.findByUsername(username);
+	}
 	
 
 }
