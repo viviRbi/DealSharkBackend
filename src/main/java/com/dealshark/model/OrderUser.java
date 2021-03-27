@@ -1,5 +1,7 @@
 package com.dealshark.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,28 +9,69 @@ import javax.persistence.*;
 public class OrderUser {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userSequence")
-	@SequenceGenerator(name="userSequence", sequenceName="USER_SEQ", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="orderUserSequence")
+	@SequenceGenerator(name="orderUserSequence", sequenceName="ORDER_USER_SEQ", allocationSize=1)
+	@Column(name="ORDER_USER_ID")
 	private int orderUserId;  // primary key here
 	
-	@Column(name="USER_ID", nullable=false, columnDefinition="INT")
-	private int userId; // think this is foreign key that goes to user model id
+	@ManyToOne
+	@JoinColumn(name="USER_ID")
+	private User user; // this is where we get user id from in the constructor
+	
 	
 	@Column(name="TOTAL_PRICE", nullable=false, columnDefinition="NUMERIC")
 	private double totalPrice;
-
-	public OrderUser() {}
 	
-	public OrderUser(int orderUserId, int userId, double totalPrice) {
+	
+	@OneToMany(mappedBy="orderUser")
+	private Set<Order> order;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public OrderUser() {}
+
+	public OrderUser(int orderUserId, User user, double totalPrice) {
 		super();
 		this.orderUserId = orderUserId;
-		this.userId = userId;
+		this.user = user;
+		this.totalPrice = totalPrice;
+	}
+	
+	
+	
+	
+
+	public OrderUser(User user, double totalPrice) {
+		super();
+		this.user = user;
 		this.totalPrice = totalPrice;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderUser [orderUserId=" + orderUserId + ", userId=" + userId + ", totalPrice=" + totalPrice + "]";
+	public OrderUser(double totalPrice) {
+		super();
+		this.totalPrice = totalPrice;
+	}
+
+	public int getOrderUserId() {
+		return orderUserId;
+	}
+
+	public void setOrderUserId(int orderUserId) {
+		this.orderUserId = orderUserId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	@Override
@@ -39,7 +82,7 @@ public class OrderUser {
 		long temp;
 		temp = Double.doubleToLongBits(totalPrice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + userId;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -56,34 +99,19 @@ public class OrderUser {
 			return false;
 		if (Double.doubleToLongBits(totalPrice) != Double.doubleToLongBits(other.totalPrice))
 			return false;
-		if (userId != other.userId)
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
 
-	public int getOrderUserId() {
-		return orderUserId;
+	@Override
+	public String toString() {
+		return "OrderUser [orderUserId=" + orderUserId + ", user=" + user + ", totalPrice=" + totalPrice + "]";
 	}
-
-	public void setOrderUserId(int orderUserId) {
-		this.orderUserId = orderUserId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+	
 	
 	
 
