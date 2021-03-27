@@ -1,5 +1,7 @@
-/*
+
 package com.dealshark.model;
+
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -7,33 +9,110 @@ import javax.persistence.*;
 @Table(name="ORDERS")
 public class Order {
 	
-	@Column(name="ORDER_USER_ID", columnDefinition="INT")
-	private int userId;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order")
+	@SequenceGenerator(name="order", sequenceName="ORDER_SEQ", allocationSize=1)
+	@Column(name="ORDER_ID")
+	private int orderId;  // primary key here
 	
 	@Column(name="GAME_ID", columnDefinition="INT")
 	private int gameId;
 	
+	@ManyToOne
+	@JoinColumn(name="ORDER_USER_ID")
+	private OrderUser orderUser;
+	
 	@Column(name="GAME_PRICE", columnDefinition="NUMERIC")
 	private int gamePrice;
 	
-	@Column(name="quantity", columnDefinition="INT")
+	@Column(name="QUANTITY", columnDefinition="INT")
 	private int quantity;
+	
+
 
 	public Order() {}
-	
-	public Order(int userId, int gameId, int gamePrice, int quantity) {
+
+
+
+	public Order(int gameId, OrderUser orderUser, int gamePrice, int quantity) {
 		super();
-		this.userId = userId;
 		this.gameId = gameId;
+		this.orderUser = orderUser;
 		this.gamePrice = gamePrice;
 		this.quantity = quantity;
 	}
 
-	@Override
-	public String toString() {
-		return "Order [userId=" + userId + ", gameId=" + gameId + ", gamePrice=" + gamePrice + ", quantity=" + quantity
-				+ "]";
+
+
+	public Order(OrderUser orderUser, int gamePrice, int quantity) {
+		super();
+		this.orderUser = orderUser;
+		this.gamePrice = gamePrice;
+		this.quantity = quantity;
 	}
+
+
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+
+
+	public int getGameId() {
+		return gameId;
+	}
+
+
+
+	public void setGameId(int gameId) {
+		this.gameId = gameId;
+	}
+
+
+
+	public OrderUser getOrderUser() {
+		return orderUser;
+	}
+
+
+
+	public void setOrderUser(OrderUser orderUser) {
+		this.orderUser = orderUser;
+	}
+
+
+
+	public int getGamePrice() {
+		return gamePrice;
+	}
+
+
+
+	public void setGamePrice(int gamePrice) {
+		this.gamePrice = gamePrice;
+	}
+
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -41,10 +120,13 @@ public class Order {
 		int result = 1;
 		result = prime * result + gameId;
 		result = prime * result + gamePrice;
+		result = prime * result + orderId;
+		result = prime * result + ((orderUser == null) ? 0 : orderUser.hashCode());
 		result = prime * result + quantity;
-		result = prime * result + userId;
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -59,46 +141,27 @@ public class Order {
 			return false;
 		if (gamePrice != other.gamePrice)
 			return false;
-		if (quantity != other.quantity)
+		if (orderId != other.orderId)
 			return false;
-		if (userId != other.userId)
+		if (orderUser == null) {
+			if (other.orderUser != null)
+				return false;
+		} else if (!orderUser.equals(other.orderUser))
+			return false;
+		if (quantity != other.quantity)
 			return false;
 		return true;
 	}
 
-	public int getUserId() {
-		return userId;
+
+
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", gameId=" + gameId + ", orderUser=" + orderUser + ", gamePrice="
+				+ gamePrice + ", quantity=" + quantity + "]";
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getGameId() {
-		return gameId;
-	}
-
-	public void setGameId(int gameId) {
-		this.gameId = gameId;
-	}
-
-	public int getGamePrice() {
-		return gamePrice;
-	}
-
-	public void setGamePrice(int gamePrice) {
-		this.gamePrice = gamePrice;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 
 	
-	
+
 }
-*/
