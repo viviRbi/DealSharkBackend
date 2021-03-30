@@ -1,10 +1,13 @@
 package com.dealshark.model;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +27,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userSequence")
 	@SequenceGenerator(name="userSequence", sequenceName="USER_SEQ", allocationSize=1)
-	@Column(name="USER_ID")
+	@Column(name="USER_ID", nullable=false)
 	private int id;  // primary key here
 	
 	@Column(name="USERNAME", unique=true, nullable=false, columnDefinition="VARCHAR")
@@ -49,8 +52,8 @@ public class User {
 	@Column(name="PURCHASED_GAMES", columnDefinition="VARCHAR")
 	private String purchasedArray;
 	
-	@OneToMany(mappedBy="user")
-	private Set<OrderUser> orderUser;
+	@OneToMany(cascade = {CascadeType.PERSIST})
+	private Set<OrderUser> orderUser = new HashSet<OrderUser>();
 	
 	
 	
@@ -116,6 +119,11 @@ public class User {
 		this.purchasedArray = purchasedArray;
 		this.orderUser = orderUser;
 	}
+	
+	
+
+
+	
 
 
 	public int getId() {

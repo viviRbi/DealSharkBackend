@@ -19,6 +19,8 @@ public class OrderUser {
 	private User user; // this is where we get user id from in the constructor
 	
 	
+	
+	
 	@Column(name="TOTAL_PRICE", nullable=false, columnDefinition="NUMERIC")
 	private double totalPrice;
 	
@@ -27,57 +29,47 @@ public class OrderUser {
 	private Set<Order> order;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public OrderUser() {}
-
-	public OrderUser(int orderUserId, User user, double totalPrice) {
+	public OrderUser(int orderUserId, User user, double totalPrice, Set<Order> order) {
 		super();
 		this.orderUserId = orderUserId;
 		this.user = user;
 		this.totalPrice = totalPrice;
+		this.order = order;
 	}
-	
-	
-	
-	
-
 	public OrderUser(User user, double totalPrice) {
 		super();
 		this.user = user;
 		this.totalPrice = totalPrice;
 	}
-
-	public OrderUser(double totalPrice) {
-		super();
-		this.totalPrice = totalPrice;
-	}
-
 	public int getOrderUserId() {
 		return orderUserId;
 	}
-
 	public void setOrderUserId(int orderUserId) {
 		this.orderUserId = orderUserId;
 	}
-
 	public User getUser() {
 		return user;
 	}
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 	public double getTotalPrice() {
 		return totalPrice;
 	}
-
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-
+	public Set<Order> getOrder() {
+		return order;
+	}
+	public void setOrder(Set<Order> order) {
+		this.order = order;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((order == null) ? 0 : order.hashCode());
 		result = prime * result + orderUserId;
 		long temp;
 		temp = Double.doubleToLongBits(totalPrice);
@@ -85,7 +77,6 @@ public class OrderUser {
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -95,6 +86,11 @@ public class OrderUser {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderUser other = (OrderUser) obj;
+		if (order == null) {
+			if (other.order != null)
+				return false;
+		} else if (!order.equals(other.order))
+			return false;
 		if (orderUserId != other.orderUserId)
 			return false;
 		if (Double.doubleToLongBits(totalPrice) != Double.doubleToLongBits(other.totalPrice))
@@ -106,14 +102,10 @@ public class OrderUser {
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return "OrderUser [orderUserId=" + orderUserId + ", user=" + user + ", totalPrice=" + totalPrice + "]";
+		return "OrderUser [orderUserId=" + orderUserId + ", user=" + user + ", totalPrice=" + totalPrice + ", order="
+				+ order + "]";
 	}
-	
-	
-	
-
 
 }
