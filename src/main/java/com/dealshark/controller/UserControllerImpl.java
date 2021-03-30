@@ -1,6 +1,7 @@
 package com.dealshark.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,11 +45,23 @@ public class UserControllerImpl implements UserController{
 		return userService.getAllUsers();
 	}
 	
+	@PostMapping("/updateSavedGame")
+	public @ResponseBody String updateSavedGame(@RequestBody Map<String, String> json , HttpServletRequest request) {
+		request.getSession();
+		String saved_games = json.get("saved_games");
+		int user_id  = Integer.parseInt(json.get("user_id"));
+		System.out.println("saved" + saved_games);
+		System.out.println("is" + user_id);
+		System.out.println(request.getSession());
+		return userService.updateSavedGame(saved_games, user_id);
+	}
+	
 	@PostMapping("/findUser")
 	public @ResponseBody User findHero(@RequestBody User user, HttpServletRequest request) {
 
 		request.getSession();
 		return userService.getByUsername(user.getUsername());
 	}
+	
 
 }

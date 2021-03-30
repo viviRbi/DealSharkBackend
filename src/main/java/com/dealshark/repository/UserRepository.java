@@ -13,4 +13,6 @@ public interface UserRepository {
 	User authentication(String userName, String userPassword);
 	
 	User findByUsername(String username);
+	
+	String updateSavedGame(String savedGameIds, int userId);
 }

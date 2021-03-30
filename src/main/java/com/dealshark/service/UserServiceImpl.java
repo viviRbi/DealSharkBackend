@@ -72,6 +72,12 @@ public class UserServiceImpl implements UserService{
 		
 		return userRepository.findByUsername(username);
 	}
+
+	@Override
+	public String updateSavedGame(String savedGameIds, int userId) {
+		System.out.println("update save service");
+		return userRepository.updateSavedGame(savedGameIds, userId);
+	}
 	
 
 }

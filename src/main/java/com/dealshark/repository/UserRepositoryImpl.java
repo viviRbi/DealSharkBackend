@@ -3,6 +3,7 @@ package com.dealshark.repository;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,25 @@ public class UserRepositoryImpl implements UserRepository {
 
 		return sessionFactory.getCurrentSession().createCriteria(User.class).list();
 	}
+	
+	@Override
+	public String updateSavedGame(String savedGameIds, int userId) {
+System.out.println("repository");
+        Query query = sessionFactory.getCurrentSession().createQuery("update User u set u.gamesArray =:savedGameIds where u.id = :userId");
+        query.setParameter("savedGameIds", savedGameIds);  
+        query.setParameter("userId", userId);  
+        System.out.println("result num" + query);
+        int result = query.executeUpdate();
+        System.out.println("result num" + result);
+        if(result > 0) {
+        	System.out.println("Success");
+        	return savedGameIds;
+        }
+        else {
+        	System.out.println("Fail");
+        	return null;}
+		
+	}
 
 	@Override
 	public User authentication(String userName, String userPassword) {
@@ -44,9 +64,9 @@ public class UserRepositoryImpl implements UserRepository {
 		User sendUser;
 		boolean success = false;
 		try {
-			//return (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.like("name", passedThruName))
-					//.list().get(0);
-			user = (User) sessionFactory.getCurrentSession().createQuery("FROM User U WHERE U.username = :userName").setParameter("userName", userName)
+			
+			user = (User) sessionFactory.getCurrentSession().createQuery("FROM User U WHERE U.username = :userName AND U.password= :password")
+					.setParameter("userName", userName).setParameter("password", userPassword)
 	                .uniqueResult();
 
 	            if (user != null && user.getPassword().equals(userPassword)) {
@@ -80,4 +100,5 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
+	
 }
