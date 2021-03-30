@@ -27,6 +27,11 @@ public class UserControllerImpl implements UserController{
 	@Autowired
 	private UserService userService;
 
+	@PostMapping("/update")
+	public @ResponseBody ClientMessage updateUser(@RequestBody User user) {
+		return (userService.updateUser(user)) ? USER_UPDATE_SUCCESSFUL : SOMETHING_WRONG;
+	}
+	
 	@PostMapping("/register")
 	public @ResponseBody ClientMessage registerUser(@RequestBody User user) {
 

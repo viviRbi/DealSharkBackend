@@ -30,6 +30,8 @@ public class UserRepositoryImpl implements UserRepository {
 
 		sessionFactory.getCurrentSession().save(user);
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -80,6 +82,27 @@ public class UserRepositoryImpl implements UserRepository {
 			
 			
 		}
+	}
+	
+	@Override public void update(User user) {
+		System.out.println("repository");
+		System.out.println("Here is the users info: " + user.getFirstName() + user.getLastName());
+		Query query = sessionFactory.getCurrentSession().createQuery("update User u set u.balance =:newBalance, u.username =:newUsername, "
+				+ " u.password =:newPassword, u.firstName =:newFirstName, u.lastName =:newLastName where u.id =:userId");
+		query.setParameter("newBalance", user.getBalance());
+		query.setParameter("newUsername", user.getUsername());
+		query.setParameter("newPassword", user.getPassword());
+		query.setParameter("newFirstName", user.getFirstName());
+		query.setParameter("newLastName", user.getLastName());
+		query.setParameter("userId", user.getId());
+		
+		int result = query.executeUpdate();
+		if(result > 0) {
+        	System.out.println("Success");
+        }
+        else {
+        	System.out.println("Fail");
+        }	
 	}
 	
 	//----------------------------------------- Game Repository in user repository. Update later
