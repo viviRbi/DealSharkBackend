@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,6 +55,14 @@ public class UserControllerImpl implements UserController{
 		System.out.println("is" + user_id);
 		System.out.println(request.getSession());
 		return userService.updateSavedGame(saved_games, user_id);
+	}
+	
+	@GetMapping("/getSavedGame/{id}")
+	// After save user to session, empty int user_id
+	public @ResponseBody String getSavedGame(@PathVariable("id") int id){
+		System.out.println(id);
+		
+		return userService.getSavedGame(id);
 	}
 	
 	@PostMapping("/findUser")

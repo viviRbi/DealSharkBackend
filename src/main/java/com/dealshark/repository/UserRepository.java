@@ -15,4 +15,5 @@ public interface UserRepository {
 	User findByUsername(String username);
 	
 	String updateSavedGame(String savedGameIds, int userId);
+	String getSavedGame(int user_id);
 }

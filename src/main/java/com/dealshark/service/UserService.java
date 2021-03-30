@@ -15,5 +15,7 @@ public interface UserService {
 	public User getByUsername(String username);
 	
 	public String updateSavedGame(String saved_games, int user_id);
+	
+	public String getSavedGame(int user_id);
 
 }

@@ -37,25 +37,6 @@ public class UserRepositoryImpl implements UserRepository {
 
 		return sessionFactory.getCurrentSession().createCriteria(User.class).list();
 	}
-	
-	@Override
-	public String updateSavedGame(String savedGameIds, int userId) {
-System.out.println("repository");
-        Query query = sessionFactory.getCurrentSession().createQuery("update User u set u.gamesArray =:savedGameIds where u.id = :userId");
-        query.setParameter("savedGameIds", savedGameIds);  
-        query.setParameter("userId", userId);  
-        System.out.println("result num" + query);
-        int result = query.executeUpdate();
-        System.out.println("result num" + result);
-        if(result > 0) {
-        	System.out.println("Success");
-        	return savedGameIds;
-        }
-        else {
-        	System.out.println("Fail");
-        	return null;}
-		
-	}
 
 	@Override
 	public User authentication(String userName, String userPassword) {
@@ -76,6 +57,7 @@ System.out.println("repository");
 			logger.debug(e);
 		}
 		if (success == true) {
+			// -----------------------------------------------Set session here
 			// send a user with an empty password
 			sendUser = new User(user.getId(), user.getUsername(), "", user.getFirstName(), user.getLastName(), user.getBalance()); 
 		} else {
@@ -99,6 +81,34 @@ System.out.println("repository");
 			
 		}
 	}
+	
+	//----------------------------------------- Game Repository in user repository. Update later
+	@Override
+	public String updateSavedGame(String savedGameIds, int userId) {
+System.out.println("repository");
+        Query query = sessionFactory.getCurrentSession().createQuery("update User u set u.gamesArray =:savedGameIds where u.id = :userId");
+        query.setParameter("savedGameIds", savedGameIds);  
+        query.setParameter("userId", userId);  
+        int result = query.executeUpdate();
+        if(result > 0) {
+        	System.out.println("Success");
+        	return savedGameIds;
+        }
+        else {
+        	System.out.println("Fail");
+        	return null;}	
+	}
+	@Override
+	public String getSavedGame(int user_id) {
+		System.out.println("get saved game Repository");
+		Query query = sessionFactory.getCurrentSession().createQuery("SELECT u.gamesArray FROM User u WHERE u.id = :userId");
+		query.setParameter("userId", user_id);
+		String savedGame = (String) query.uniqueResult();
+		System.out.println("get saved game " + savedGame);
+		return savedGame;
+	}
+
+	
 
 	
 }
