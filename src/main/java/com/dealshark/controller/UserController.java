@@ -11,6 +11,8 @@ public interface UserController {
 	
 	ClientMessage registerUser(User user);
 	
+	ClientMessage updateUser(User user);
+	
 	User findUser(User user, HttpServletRequest request);
 	
 	List<User> findAllUsers();

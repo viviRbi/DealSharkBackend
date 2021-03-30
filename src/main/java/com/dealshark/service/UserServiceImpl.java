@@ -34,6 +34,13 @@ public class UserServiceImpl implements UserService{
 		
 		return user.getId() != 0;
  	}
+	
+	@Override
+	public boolean updateUser(User user) {
+		userRepository.update(user);
+		
+		return user.getId() != 0;
+	}
 
 	@Override
 	public List<User> getAllUsers() {

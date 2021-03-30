@@ -8,6 +8,8 @@ public interface UserRepository {
 
 	void save(User user);
 	
+	void update(User user);
+	
 	List<User> findAll();
 	
 	User authentication(String userName, String userPassword);

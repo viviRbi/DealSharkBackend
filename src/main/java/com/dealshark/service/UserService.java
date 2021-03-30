@@ -17,5 +17,7 @@ public interface UserService {
 	public String updateSavedGame(String saved_games, int user_id);
 	
 	public String getSavedGame(int user_id);
+	
+	public boolean updateUser(User user);
 
 }
