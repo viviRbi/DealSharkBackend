@@ -34,7 +34,7 @@ public class UserControllerImpl implements UserController{
 	
 	@PostMapping("/register")
 	public @ResponseBody ClientMessage registerUser(@RequestBody User user) {
-
+		System.out.println("this is register" + user);
 		return (userService.registerUser(user)) ? REGISTRATION_SUCCESSFUL : SOMETHING_WRONG;
 	}
 
