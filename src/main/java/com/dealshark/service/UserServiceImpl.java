@@ -37,6 +37,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public boolean updateUser(User user) {
+		String hashedPass = this.hashPassword(user.getPassword());
+		user.setPassword(hashedPass);
 		userRepository.update(user);
 		
 		return user.getId() != 0;
