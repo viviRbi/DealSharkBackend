@@ -25,6 +25,8 @@ public class OrderUserServiceImpl implements OrderUserService{
 
 	@Override
 	public boolean insertOrderUser(OrderUser orderUser) {
+		
+		
 		orderUserRepository.save(orderUser);
 		return orderUser.getTotalPrice() != 0;
 	}

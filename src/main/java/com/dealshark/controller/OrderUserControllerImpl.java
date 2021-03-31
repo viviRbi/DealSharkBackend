@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dealshark.ajax.ClientMessage;
 import com.dealshark.model.OrderUser;
+import com.dealshark.model.User;
 import com.dealshark.service.OrderUserService;
 import static com.dealshark.util.ClientMessageUtil.*;
 
@@ -30,9 +31,12 @@ public class OrderUserControllerImpl implements OrderUserController {
 	
 	@PostMapping("/newOrder")
 	public @ResponseBody ClientMessage addOrderUser(@RequestBody OrderUser orderUser) {
-
+		System.out.println("here is the order user we took in " + orderUser);
 		return (orderUserService.insertOrderUser(orderUser)) ? REGISTRATION_SUCCESSFUL : SOMETHING_WRONG;
+		
 	}
+	
+
 
 	
 	

@@ -34,6 +34,7 @@ public class Order {
 	public Order() {}
 
 
+	
 
 	public Order(int gameId, OrderUser orderUser, int gamePrice, int quantity) {
 		super();

@@ -1,7 +1,9 @@
 package com.dealshark.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,7 +20,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.mapping.Array;
-import org.hibernate.mapping.List;
 
 @Entity
 @Table(name="USERS")
@@ -52,8 +53,12 @@ public class User {
 	@Column(name="PURCHASED_GAMES", columnDefinition="VARCHAR")
 	private String purchasedArray;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST})
-	private Set<OrderUser> orderUser = new HashSet<OrderUser>();
+	@OneToMany(mappedBy="user")
+	private List<OrderUser> orderUser = new ArrayList<OrderUser>();
+	
+
+//	@OneToMany(mappedBy="orderUser") just used this to make sure things match
+//	private List<Order> order = new ArrayList<Order>();
 	
 	
 	
@@ -62,8 +67,18 @@ public class User {
 	public User() {
 		
 	}
+	
+	
 
 	
+	public User(int id) {
+		super();
+		this.id = id;
+	}
+
+
+
+
 	public User(String username, String password, String firstName, String lastName) {
 		super();
 		this.username = username;
@@ -80,7 +95,26 @@ public class User {
 		this.lastName = lastName;
 		this.balance = balance;
 	}
-	
+
+
+
+
+	public User(String username, String password, String firstName, String lastName, int balance, String gamesArray,
+			String purchasedArray, List<OrderUser> orderUser) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.balance = balance;
+		this.gamesArray = gamesArray;
+		this.purchasedArray = purchasedArray;
+		this.orderUser = orderUser;
+	}
+
+
+
+
 	public User(int id, String username, String password, String firstName, String lastName, int balance) {
 		super();
 		this.id = id;
@@ -92,38 +126,6 @@ public class User {
 	}
 
 
-	public User(int id, String username, String password, String firstName, String lastName, int balance,
-			String gamesArray, String purchasedArray, Set<OrderUser> orderUser) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.balance = balance;
-		this.gamesArray = gamesArray;
-		this.purchasedArray = purchasedArray;
-		this.orderUser = orderUser;
-	}
-
-
-	public User(String username, String password, String firstName, String lastName, int balance, String gamesArray,
-			String purchasedArray, Set<OrderUser> orderUser) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.balance = balance;
-		this.gamesArray = gamesArray;
-		this.purchasedArray = purchasedArray;
-		this.orderUser = orderUser;
-	}
-	
-	
-
-
-	
 
 
 	public int getId() {
@@ -131,9 +133,13 @@ public class User {
 	}
 
 
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 
 	public String getUsername() {
@@ -141,9 +147,13 @@ public class User {
 	}
 
 
+
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+
 
 
 	public String getPassword() {
@@ -151,9 +161,13 @@ public class User {
 	}
 
 
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 
 
 	public String getFirstName() {
@@ -161,9 +175,13 @@ public class User {
 	}
 
 
+
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
+
 
 
 	public String getLastName() {
@@ -171,9 +189,13 @@ public class User {
 	}
 
 
+
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+
 
 
 	public int getBalance() {
@@ -181,9 +203,13 @@ public class User {
 	}
 
 
+
+
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
+
+
 
 
 	public String getGamesArray() {
@@ -191,9 +217,13 @@ public class User {
 	}
 
 
+
+
 	public void setGamesArray(String gamesArray) {
 		this.gamesArray = gamesArray;
 	}
+
+
 
 
 	public String getPurchasedArray() {
@@ -201,19 +231,27 @@ public class User {
 	}
 
 
+
+
 	public void setPurchasedArray(String purchasedArray) {
 		this.purchasedArray = purchasedArray;
 	}
 
 
-	public Set<OrderUser> getOrderUser() {
+
+
+	public List<OrderUser> getOrderUser() {
 		return orderUser;
 	}
 
 
-	public void setOrderUser(Set<OrderUser> orderUser) {
+
+
+	public void setOrderUser(List<OrderUser> orderUser) {
 		this.orderUser = orderUser;
 	}
+
+
 
 
 	@Override
@@ -231,6 +269,8 @@ public class User {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
+
 
 
 	@Override
@@ -285,6 +325,8 @@ public class User {
 	}
 
 
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
@@ -294,5 +336,6 @@ public class User {
 
 
 
+	
 
 }
