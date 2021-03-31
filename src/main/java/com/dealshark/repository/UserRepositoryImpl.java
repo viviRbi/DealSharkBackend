@@ -61,7 +61,7 @@ public class UserRepositoryImpl implements UserRepository {
 		if (success == true) {
 			// -----------------------------------------------Set session here
 			// send a user with an empty password
-			sendUser = new User(user.getId(), user.getUsername(), "", user.getFirstName(), user.getLastName(), user.getBalance()); 
+			sendUser = new User(user.getId(), user.getUsername(), "", user.getFirstName(), user.getLastName(), user.getBalance(), user.getGamesArray(),user.getPurchasedArray(),null); 
 		} else {
 			sendUser = new User(0,"", "", "", "", 0);
 		}
