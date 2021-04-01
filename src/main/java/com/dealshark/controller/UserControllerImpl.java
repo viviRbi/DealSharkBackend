@@ -40,8 +40,8 @@ public class UserControllerImpl implements UserController{
 
 	@PostMapping("/authenticateUser")
 	public @ResponseBody User findUser(@RequestBody User user, HttpServletRequest request) {
-		
-		request.getSession();
+		//System.out.println("loggin in");
+		//request.getSession();
 		return userService.getUser(user.getUsername(), user.getPassword());
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dealshark.model.OrderUser;
 import com.dealshark.model.User;
 
 @Repository("userRepository")
@@ -61,7 +62,7 @@ public class UserRepositoryImpl implements UserRepository {
 		if (success == true) {
 			// -----------------------------------------------Set session here
 			// send a user with an empty password
-			sendUser = new User(user.getId(), user.getUsername(), "", user.getFirstName(), user.getLastName(), user.getBalance(), user.getGamesArray(),user.getPurchasedArray(),null); 
+			sendUser = new User(user.getId(), userName, userPassword, user.getFirstName(), user.getLastName(), user.getBalance(), user.getGamesArray(),user.getPurchasedArray()); 
 		} else {
 			sendUser = new User(0,"", "", "", "", 0);
 		}

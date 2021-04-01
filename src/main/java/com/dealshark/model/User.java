@@ -111,10 +111,7 @@ public class User {
 		this.purchasedArray = purchasedArray;
 		this.orderUser = orderUser;
 	}
-
-
-
-
+	
 	public User(int id, String username, String password, String firstName, String lastName, int balance) {
 		super();
 		this.id = id;
@@ -123,6 +120,25 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.balance = balance;
+	}
+
+
+
+
+
+
+	public User(int id, String username, String password, String firstName, String lastName, int balance, String gamesArray,
+			String purchasedArray) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.balance = balance;
+		this.gamesArray = gamesArray;
+		this.purchasedArray = purchasedArray;
+		this.orderUser = orderUser;
 	}
 
 
