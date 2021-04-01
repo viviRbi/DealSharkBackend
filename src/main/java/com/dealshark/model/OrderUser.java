@@ -1,5 +1,7 @@
 package com.dealshark.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -15,7 +17,7 @@ public class OrderUser {
 	private int orderUserId;  // primary key here
 	
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="userId")
 	private User user; // this is where we get user id from in the constructor
 	
 	
@@ -26,86 +28,87 @@ public class OrderUser {
 	
 	
 	@OneToMany(mappedBy="orderUser")
-	private Set<Order> order;
+	private List<Order> order = new ArrayList<Order>();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public OrderUser() {}
-	public OrderUser(int orderUserId, User user, double totalPrice, Set<Order> order) {
-		super();
-		this.orderUserId = orderUserId;
-		this.user = user;
-		this.totalPrice = totalPrice;
-		this.order = order;
-	}
-	public OrderUser(User user, double totalPrice) {
-		super();
-		this.user = user;
-		this.totalPrice = totalPrice;
-	}
-	public int getOrderUserId() {
-		return orderUserId;
-	}
-	public void setOrderUserId(int orderUserId) {
-		this.orderUserId = orderUserId;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	public Set<Order> getOrder() {
-		return order;
-	}
-	public void setOrder(Set<Order> order) {
-		this.order = order;
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
-		result = prime * result + orderUserId;
-		long temp;
-		temp = Double.doubleToLongBits(totalPrice);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OrderUser other = (OrderUser) obj;
-		if (order == null) {
-			if (other.order != null)
-				return false;
-		} else if (!order.equals(other.order))
-			return false;
-		if (orderUserId != other.orderUserId)
-			return false;
-		if (Double.doubleToLongBits(totalPrice) != Double.doubleToLongBits(other.totalPrice))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
+public OrderUser(int orderUserId, User user, double totalPrice, List<Order> order) {
+	super();
+	this.orderUserId = orderUserId;
+	this.user = user;
+	this.totalPrice = totalPrice;
+	this.order = order;
+}
+public OrderUser(User user, double totalPrice) {
+	super();
+	this.user = user;
+	this.totalPrice = totalPrice;
+}
+public int getOrderUserId() {
+	return orderUserId;
+}
+public void setOrderUserId(int orderUserId) {
+	this.orderUserId = orderUserId;
+}
+public User getUser() {
+	return user;
+}
+public void setUser(User user) {
+	this.user = user;
+}
+public double getTotalPrice() {
+	return totalPrice;
+}
+public void setTotalPrice(double totalPrice) {
+	this.totalPrice = totalPrice;
+}
+public List<Order> getOrder() {
+	return order;
+}
+public void setOrder(List<Order> order) {
+	this.order = order;
+}
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((order == null) ? 0 : order.hashCode());
+	result = prime * result + orderUserId;
+	long temp;
+	temp = Double.doubleToLongBits(totalPrice);
+	result = prime * result + (int) (temp ^ (temp >>> 32));
+	result = prime * result + ((user == null) ? 0 : user.hashCode());
+	return result;
+}
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
 		return true;
-	}
-	@Override
-	public String toString() {
-		return "OrderUser [orderUserId=" + orderUserId + ", user=" + user + ", totalPrice=" + totalPrice + ", order="
-				+ order + "]";
-	}
-
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	OrderUser other = (OrderUser) obj;
+	if (order == null) {
+		if (other.order != null)
+			return false;
+	} else if (!order.equals(other.order))
+		return false;
+	if (orderUserId != other.orderUserId)
+		return false;
+	if (Double.doubleToLongBits(totalPrice) != Double.doubleToLongBits(other.totalPrice))
+		return false;
+	if (user == null) {
+		if (other.user != null)
+			return false;
+	} else if (!user.equals(other.user))
+		return false;
+	return true;
+}
+@Override
+public String toString() {
+	return "OrderUser [orderUserId=" + orderUserId + ", user=" + user + ", totalPrice=" + totalPrice + ", order="
+			+ order + "]";
+}
+	
+	
 }
