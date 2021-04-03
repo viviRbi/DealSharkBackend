@@ -1,5 +1,7 @@
 # Essential note between team member
 
+- Database changed. Detail is on our Slack group
+
 ### register url
 http://localhost:8080/Project-2/register
 ### login url

@@ -40,10 +40,11 @@
 			value="org.postgresql.Driver" />
 		<!-- customize this -->
 		<property name="url"
-			value="jdbc:postgresql://dealshark.cqqcpmco0lzl.us-east-2.rds.amazonaws.com:5432/postgres" />
+			value="jdbc:postgresql://AWS-Env-url:5432/postgres" />
+			
 
-		<property name="username" value="postgres" />
-		<property name="password" value="postgres" />
+		<property name="username" value="AWS-ENV-username" />
+		<property name="password" value="AWS-Env-pass" />
 	</bean>
 
 	<bean name="sessionFactory"
